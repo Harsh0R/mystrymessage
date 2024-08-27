@@ -1,7 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 export interface Message extends Document {
-  userId: string;
   message: string;
   createdAt: Date;
 }
@@ -18,11 +17,6 @@ export interface User extends Document {
 }
 
 const MessageSchema: Schema<Message> = new Schema({
-  userId: {
-    type: String,
-    required: true,
-    index: true,
-  },
   message: {
     type: String,
     required: true,

@@ -26,9 +26,12 @@ export async function POST(req: Request) {
     }
 
     const isCodeValid = user.verifyCode === decodedCode;
-    const isCodeExpired = new Date(user.verifyCodeExpires) > new Date();
+    const isCodeNotExpired = new Date(user.verifyCodeExpires) > new Date();
 
-    if (isCodeValid && isCodeExpired) {
+    console.log("isCodeValid => ", decodedCode);
+    console.log("isCodeNotExpired => ", decodedUsername);
+
+    if (isCodeValid && isCodeNotExpired) {
       user.isVerified = true;
       await user.save();
       return Response.json(
@@ -40,7 +43,7 @@ export async function POST(req: Request) {
           status: 200,
         }
       );
-    } else if (isCodeValid && !isCodeExpired) {
+    } else if (isCodeValid && !isCodeNotExpired) {
       return Response.json(
         {
           successs: false,
