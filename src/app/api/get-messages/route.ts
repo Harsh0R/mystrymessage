@@ -8,6 +8,7 @@ import { group } from "console";
 
  export async function GET(req:Request){
 
+    await connectToDb();
     const session = await getServerSession(authOptions);
     if (!session || !session.user) {
       return Response.json(
