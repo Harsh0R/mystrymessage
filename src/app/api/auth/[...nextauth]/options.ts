@@ -54,22 +54,22 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async session({ session, token }) {
-        if(token){
-            session.user._id = token._id;
-            session.user.username = token.username;
-            session.user.isVerified = token.isVerified;
-            session.user.isAcceptingMessages = token.isAcceptingMessages;
-        }
+      if (token) {
+        session.user._id = token._id;
+        session.user.username = token.username;
+        session.user.isVerified = token.isVerified;
+        session.user.isAcceptingMessages = token.isAcceptingMessages;
+      }
       return session;
     },
     async jwt({ token, user }) {
-        if (user) {
-            token._id = user._id?.toString();
-            token.username = user.username;
-            token.isVelified = user.isVerified;
-            token.isAcceptingMessages = user.isAcceptingMessages;
-          token.user = user;
-        }
+      if (user) {
+        token._id = user._id?.toString();
+        token.username = user.username;
+        token.isVelified = user.isVerified;
+        token.isAcceptingMessages = user.isAcceptingMessages;
+        token.user = user;
+      }
       return token;
     },
   },
